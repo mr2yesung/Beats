@@ -1,7 +1,11 @@
-import Item from "@/components/Item";
+import Product from "@/components/Product";
 import HomeSection from "./HomeSection";
+import { useFeaturedProducts } from "@/hooks/useFeaturedProducts";
+import ProductSkeleton from "@/components/ProductSkeleton";
 
 function FeaturedProducts() {
+  const { featuredProducts } = useFeaturedProducts();
+
   return (
     <HomeSection>
       <div className="container space-y-8 px-4 md:px-6">
@@ -14,11 +18,12 @@ function FeaturedProducts() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          <Item id={1} imageSrc="" name="Beats B1 Red" price={119.99} />
-          <Item id={1} imageSrc="" name="Beats B1 Red" price={119.99} />
-          <Item id={1} imageSrc="" name="Beats B1 Red" price={119.99} />
-          <Item id={1} imageSrc="" name="Beats B1 Red" price={119.99} />
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
+          {featuredProducts
+            ? featuredProducts.map((product) => (
+                <Product key={product.id} {...product} />
+              ))
+            : [...Array(4)].map((_, i) => <ProductSkeleton key={i} />)}
         </div>
       </div>
     </HomeSection>

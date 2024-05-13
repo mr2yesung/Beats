@@ -1,15 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardFooter } from "./ui/card";
+import { ProductCard } from "@/services/apiProducts";
 
-type ItemProps = {
-  id: number;
-  imageSrc: string;
-  name: string;
-  price: number;
-};
-
-function Item({ id, imageSrc, name, price }: ItemProps) {
+function Product({ id, image, name, price, saleRatio }: ProductCard) {
   const navigate = useNavigate();
 
   function handleNavigateProductPage() {
@@ -18,7 +12,12 @@ function Item({ id, imageSrc, name, price }: ItemProps) {
 
   return (
     <Card className="overflow-hidden rounded-lg bg-white shadow-md">
-      <img src={imageSrc} alt={name} onClick={handleNavigateProductPage} />
+      <img
+        src={image}
+        alt={name}
+        onClick={handleNavigateProductPage}
+        className="aspect-square w-full object-cover"
+      />
 
       <CardContent
         className="p-4 underline-offset-2 hover:cursor-pointer hover:underline"
@@ -31,12 +30,14 @@ function Item({ id, imageSrc, name, price }: ItemProps) {
         </p>
       </CardContent>
 
-      <CardFooter className="flex items-center justify-between">
-        <span className="text-xl font-semibold">&#36;{price}</span>
+      <CardFooter className="flex items-center justify-between px-4">
+        <span className="text-xl font-semibold">
+          &#36;{Math.floor(price * (100 - saleRatio)) / 100}
+        </span>
         <Button>Add to Cart</Button>
       </CardFooter>
     </Card>
   );
 }
 
-export default Item;
+export default Product;
