@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import Home from "./pages/home/Home";
+import Products from "./pages/products/Products";
 import ProductDetail from "./pages/product-detail/ProductDetail";
 import NotFound from "./pages/not-found/NotFound";
 
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product">
+          <Route index element={<Products />} />
           <Route path=":productId" element={<ProductDetail />} />
         </Route>
 
