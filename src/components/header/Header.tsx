@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import LogoIcon from "../icons/LogoIcon";
 import { Button } from "../ui/button";
 import UserIcon from "../icons/UserIcon";
-import CartIcon from "../icons/CartIcon";
+import Cart from "./Cart";
 
 function Header() {
   return (
@@ -17,9 +17,7 @@ function Header() {
             <UserIcon />
           </Button>
 
-          <Button variant={"ghost"} className="px-2">
-            <CartIcon />
-          </Button>
+          <Cart />
         </div>
       </div>
     </header>

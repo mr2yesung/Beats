@@ -2,9 +2,11 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardFooter } from "./ui/card";
 import { ProductCard } from "@/services/apiProducts";
+import { useCart } from "@/contexts/CartContext";
 
 function Product({ id, image, name, price, saleRatio }: ProductCard) {
   const navigate = useNavigate();
+  const { increaseItemQuantity } = useCart();
 
   function handleNavigateProductPage() {
     navigate(`/product/${id}`);
@@ -34,7 +36,7 @@ function Product({ id, image, name, price, saleRatio }: ProductCard) {
         <span className="text-xl font-semibold">
           &#36;{Math.floor(price * (100 - saleRatio)) / 100}
         </span>
-        <Button>Add to Cart</Button>
+        <Button onClick={() => increaseItemQuantity(id)}>Add to Cart</Button>
       </CardFooter>
     </Card>
   );

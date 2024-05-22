@@ -4,12 +4,14 @@ import { useProductById } from "@/hooks/useProductById";
 import Loading from "@/components/Loading";
 import ProductPrice from "./ProductPrice";
 import ProductFeatures from "./ProductFeatures";
+import { useCart } from "@/contexts/CartContext";
 
 function ProductDetail() {
   const { productId } = useParams();
   const { productDetail, isLoading } = useProductById(
     productId ? parseInt(productId) : 0,
   );
+  const { increaseItemQuantity } = useCart();
 
   if (isLoading) return <Loading />;
 
@@ -41,7 +43,9 @@ function ProductDetail() {
             mechanical keyboard.
           </p>
           <div className="flex gap-4">
-            <Button>Add to Cart</Button>
+            <Button onClick={() => increaseItemQuantity(productDetail.id)}>
+              Add to Cart
+            </Button>
             <Button variant="outline">Buy Now</Button>
           </div>
         </div>
