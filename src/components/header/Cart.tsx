@@ -27,7 +27,10 @@ function Cart() {
       <SheetTrigger asChild>
         <Button variant={"ghost"} className="relative px-2">
           <div className="absolute -top-1 left-3/4 text-xs text-primary">
-            {cartItems.length > 0 ? cartItems.length : null}
+            {cartItems.reduce(
+              (totalQuantity, item) => totalQuantity + item.quantity,
+              0,
+            ) || null}
           </div>
           <CartIcon />
         </Button>
