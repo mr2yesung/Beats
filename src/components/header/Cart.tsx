@@ -15,10 +15,15 @@ import { ScrollArea } from "../ui/scroll-area";
 import CartItem from "./CartItem";
 
 function Cart() {
-  const { cartItems } = useCart();
+  const { cartItems, isCartOpen, setIsCartOpen } = useCart();
 
   return (
-    <Sheet>
+    <Sheet
+      open={isCartOpen}
+      onOpenChange={(open) => {
+        setIsCartOpen(open);
+      }}
+    >
       <SheetTrigger asChild>
         <Button variant={"ghost"} className="relative px-2">
           <div className="absolute -top-1 left-3/4 text-xs text-primary">

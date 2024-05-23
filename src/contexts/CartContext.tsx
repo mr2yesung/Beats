@@ -1,5 +1,5 @@
 import { useLocalStorageState } from "@/hooks/useLocalStorageState";
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 
 type cartItem = {
   productId: number;
@@ -11,6 +11,8 @@ type cartContext = {
   increaseItemQuantity: (id: number) => void;
   decreaseItemQuantity: (id: number) => void;
   removeItem: (id: number) => void;
+  isCartOpen: boolean;
+  setIsCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const CartContext = createContext({} as cartContext);
@@ -20,6 +22,7 @@ type CartProviderProps = {
 };
 
 function CartProvider({ children }: CartProviderProps) {
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartItems, setCartItems] = useLocalStorageState<cartItem[]>(
     [],
     "cart",
@@ -72,6 +75,8 @@ function CartProvider({ children }: CartProviderProps) {
         increaseItemQuantity,
         decreaseItemQuantity,
         removeItem,
+        isCartOpen,
+        setIsCartOpen,
       }}
     >
       {children}

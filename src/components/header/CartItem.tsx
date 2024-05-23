@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useProductById } from "@/hooks/useProductById";
 import { Card } from "../ui/card";
 import { cartItem, useCart } from "@/contexts/CartContext";
@@ -5,10 +6,21 @@ import { Button } from "../ui/button";
 import TrashIcon from "../icons/TrashIcon";
 
 function CartItem({ productId, quantity }: cartItem) {
+  const navigate = useNavigate();
   const { productDetail } = useProductById(productId);
-  const { increaseItemQuantity, decreaseItemQuantity, removeItem } = useCart();
+  const {
+    increaseItemQuantity,
+    decreaseItemQuantity,
+    removeItem,
+    setIsCartOpen,
+  } = useCart();
 
   if (!productDetail) return null;
+
+  function handleNavigateProductPage() {
+    navigate(`/product/${productId}`);
+    setIsCartOpen(false);
+  }
 
   return (
     <Card className="flex items-center gap-x-3 p-2">
@@ -18,11 +30,17 @@ function CartItem({ productId, quantity }: cartItem) {
         className="aspect-square rounded object-cover"
         height={80}
         width={80}
+        onClick={handleNavigateProductPage}
       />
 
       <div className="space-y-2">
         <div>
-          <div className="text-base font-medium">{productDetail.name}</div>
+          <div
+            className="text-base font-medium hover:cursor-pointer hover:underline"
+            onClick={handleNavigateProductPage}
+          >
+            {productDetail.name}
+          </div>
           <div className="text-sm text-foreground/60">
             &#36;
             {(quantity *
