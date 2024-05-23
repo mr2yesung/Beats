@@ -1,5 +1,5 @@
 import Product from "@/components/Product";
-import HomeSection from "./HomeSection";
+import PageSection from "../../components/PageSection";
 import { useFeaturedProducts } from "@/hooks/useFeaturedProducts";
 import ProductSkeleton from "@/components/ProductSkeleton";
 
@@ -7,7 +7,7 @@ function FeaturedProducts() {
   const { featuredProducts } = useFeaturedProducts();
 
   return (
-    <HomeSection>
+    <PageSection>
       <div className="container space-y-8 px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <h2 className="text-3xl font-bold capitalize tracking-tighter sm:text-4xl md:text-5xl">
@@ -26,7 +26,7 @@ function FeaturedProducts() {
             : [...Array(4)].map((_, i) => <ProductSkeleton key={i} />)}
         </div>
       </div>
-    </HomeSection>
+    </PageSection>
   );
 }
 

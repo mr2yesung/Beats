@@ -1,13 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import HomeSection from "./HomeSection";
+import PageSection from "../../components/PageSection";
 
 function Hero() {
   return (
-    <HomeSection>
+    <PageSection>
       <div className="container grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-16">
         <div className="space-y-4 md:space-y-6">
-          <h1 className="text-3xl font-bold tracking-tighter capitalize sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
+          <h1 className="text-3xl font-bold capitalize tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
             Elevate Your Gaming Setup
           </h1>
           <p className="max-w-[600px] text-foreground/60 md:text-xl">
@@ -37,7 +37,7 @@ function Hero() {
           height={600}
         />
       </div>
-    </HomeSection>
+    </PageSection>
   );
 }
 

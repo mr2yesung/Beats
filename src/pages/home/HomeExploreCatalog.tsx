@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
-import HomeSection from "./HomeSection";
+import PageSection from "../../components/PageSection";
 import { Link } from "react-router-dom";
 
 function HomeExploreCatalog() {
   return (
-    <HomeSection className="bg-primary/10">
+    <PageSection className="bg-primary/10">
       <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6 lg:gap-10">
         <div className="space-y-3">
           <h2 className="text-3xl font-bold capitalize tracking-tighter md:text-4xl/tight">
@@ -22,7 +22,7 @@ function HomeExploreCatalog() {
           </Link>
         </Button>
       </div>
-    </HomeSection>
+    </PageSection>
   );
 }
 

@@ -1,9 +1,9 @@
-type HomeSectionProps = {
+type PageSectionProps = {
   className?: string;
   children: React.ReactNode;
 };
 
-function HomeSection({ className = "", children }: HomeSectionProps) {
+function PageSection({ className = "", children }: PageSectionProps) {
   return (
     <section className={`w-full py-12 md:py-24 lg:py-32 ${className}`}>
       {children}
@@ -11,4 +11,4 @@ function HomeSection({ className = "", children }: HomeSectionProps) {
   );
 }
 
-export default HomeSection;
+export default PageSection;

@@ -6,6 +6,8 @@ import ProductDetail from "./pages/product-detail/ProductDetail";
 import NotFound from "./pages/not-found/NotFound";
 import PageLayout from "./layout/PageLayout";
 import { CartProvider } from "./contexts/CartContext";
+import Policy from "./pages/policy/Policy";
+import About from "./pages/about/About";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
               <Route index element={<Products />} />
               <Route path=":productId" element={<ProductDetail />} />
             </Route>
+            <Route path="about" element={<About />} />
+            <Route path="policy" element={<Policy />} />
           </Route>
 
           <Route path="*" element={<NotFound />} />
