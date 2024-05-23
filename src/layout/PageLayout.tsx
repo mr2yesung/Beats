@@ -5,9 +5,13 @@ import Header from "@/components/header/Header";
 function PageLayout() {
   return (
     <>
-      <Header />
+      <div className="fixed w-full bg-background">
+        <Header />
+      </div>
 
-      <Outlet />
+      <main className="pt-[68px]">
+        <Outlet />
+      </main>
 
       <Footer />
     </>
