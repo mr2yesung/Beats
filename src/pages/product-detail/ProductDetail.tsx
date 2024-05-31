@@ -6,6 +6,7 @@ import Loading from "@/components/Loading";
 import ProductPrice from "./ProductPrice";
 import ProductFeatures from "./ProductFeatures";
 import ButtonAddCart from "@/components/ButtonAddCart";
+import { useCart } from "@/contexts/CartContext";
 
 function ProductDetail() {
   const { productId } = useParams();
@@ -13,6 +14,7 @@ function ProductDetail() {
   const { productDetail, isLoading } = useProductById(
     productId ? parseInt(productId) : 0,
   );
+  const { increaseItemQuantity } = useCart();
 
   useEffect(
     function () {
@@ -22,9 +24,16 @@ function ProductDetail() {
     [productDetail, isLoading, navigate],
   );
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <Loading className="max-h-[1200px]" />;
 
   if (!productDetail) return null;
+
+  function handleBuyNow() {
+    if (!productDetail) return;
+
+    increaseItemQuantity(productDetail.id);
+    navigate("/checkout");
+  }
 
   const specifications = [
     { name: "Switches", value: productDetail.switchName },
@@ -53,7 +62,9 @@ function ProductDetail() {
           </p>
           <div className="flex gap-4">
             <ButtonAddCart id={productDetail.id} />
-            <Button variant="outline">Buy Now</Button>
+            <Button variant="outline" onClick={handleBuyNow}>
+              Buy Now
+            </Button>
           </div>
         </div>
       </div>
