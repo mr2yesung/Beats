@@ -44,6 +44,18 @@ async function getProductById(id: number) {
   return data;
 }
 
+async function getProductsByIds(ids: number[]) {
+  const { data, error } = await supabase
+    .from("products")
+    .select("id,name,image,price,saleRatio")
+    .in("id", ids)
+    .returns<ProductCard[]>();
+
+  if (error) throw new Error(error.message);
+
+  return data;
+}
+
 async function getProductsByFilter(
   filterProfile: string,
   filterSwitchType: string,
@@ -73,6 +85,7 @@ export {
   getFeaturedProducts,
   getProductById,
   getProductsByFilter,
+  getProductsByIds,
   type ProductCard,
   type ProductDetail,
 };

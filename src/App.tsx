@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Outlet, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import Home from "./pages/home/Home";
 import Products from "./pages/products/Products";
@@ -13,6 +13,8 @@ import SignUp from "./pages/sign-up/SignUp";
 import { AuthProvider } from "./contexts/AuthContext";
 import { QueryClientProvider, useQueryClient } from "@tanstack/react-query";
 import { Toaster } from "./components/ui/toaster";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Checkout from "./pages/checkout/Checkout";
 
 function App() {
   const queryClient = useQueryClient();
@@ -32,6 +34,16 @@ function App() {
               </Route>
               <Route path="about" element={<About />} />
               <Route path="policy" element={<Policy />} />
+
+              <Route
+                element={
+                  <ProtectedRoute>
+                    <Outlet />
+                  </ProtectedRoute>
+                }
+              >
+                <Route path="checkout" element={<Checkout />} />
+              </Route>
             </Route>
 
             <Route path="/login" element={<Login />} />
