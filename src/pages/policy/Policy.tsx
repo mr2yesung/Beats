@@ -24,7 +24,7 @@ const policies = [
 
 function Policy() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-primary/5">
+    <div className="flex flex-col items-center justify-center bg-primary/5">
       <div className="container max-w-3xl px-4 py-12 md:px-6 md:py-16">
         <div className="space-y-8">
           <div className="text-center">
