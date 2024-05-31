@@ -1,5 +1,6 @@
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Navigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useProductById } from "@/hooks/useProductById";
 import Loading from "@/components/Loading";
 import ProductPrice from "./ProductPrice";
@@ -8,13 +9,22 @@ import ButtonAddCart from "@/components/ButtonAddCart";
 
 function ProductDetail() {
   const { productId } = useParams();
+  const navigate = useNavigate();
   const { productDetail, isLoading } = useProductById(
     productId ? parseInt(productId) : 0,
   );
 
+  useEffect(
+    function () {
+      if (!productDetail && !isLoading)
+        navigate("/not-found", { replace: true });
+    },
+    [productDetail, isLoading, navigate],
+  );
+
   if (isLoading) return <Loading />;
 
-  if (!productDetail) return <Navigate to="/not-found" replace />;
+  if (!productDetail) return null;
 
   const specifications = [
     { name: "Switches", value: productDetail.switchName },
