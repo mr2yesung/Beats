@@ -1,6 +1,10 @@
-function Loading() {
+type LoadingProps = {
+  className?: string;
+};
+
+function Loading({ className = "" }: LoadingProps) {
   return (
-    <div className="flex h-screen items-center justify-center">
+    <div className={`flex h-screen items-center justify-center ${className}`}>
       <div className="animate-spin">
         <svg
           className="h-12 w-12 text-primary/60"

@@ -20,10 +20,6 @@ function Products() {
     [products, isLoading, navigate],
   );
 
-  if (isLoading) return <Loading />;
-
-  if (!products) return null;
-
   function resetCurrentPage() {
     setCurrentPage(1);
     window.scrollTo(0, 0);
@@ -37,7 +33,9 @@ function Products() {
         </div>
 
         <div className="col-span-3">
-          {products.length > 0 ? (
+          {isLoading ? (
+            <Loading className="max-h-[1128px]" />
+          ) : products && products.length > 0 ? (
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {products
                 .slice(
