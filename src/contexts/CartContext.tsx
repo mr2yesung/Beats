@@ -11,6 +11,7 @@ type cartContext = {
   increaseItemQuantity: (id: number) => void;
   decreaseItemQuantity: (id: number) => void;
   removeItem: (id: number) => void;
+  clearCart: () => void;
   isCartOpen: boolean;
   setIsCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -68,6 +69,10 @@ function CartProvider({ children }: CartProviderProps) {
     });
   }
 
+  function clearCart() {
+    setCartItems([]);
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -75,6 +80,7 @@ function CartProvider({ children }: CartProviderProps) {
         increaseItemQuantity,
         decreaseItemQuantity,
         removeItem,
+        clearCart,
         isCartOpen,
         setIsCartOpen,
       }}

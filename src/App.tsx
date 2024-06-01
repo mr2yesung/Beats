@@ -15,6 +15,7 @@ import { QueryClientProvider, useQueryClient } from "@tanstack/react-query";
 import { Toaster } from "./components/ui/toaster";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Checkout from "./pages/checkout/Checkout";
+import Orders from "./pages/orders/Orders";
 
 function App() {
   const queryClient = useQueryClient();
@@ -42,6 +43,7 @@ function App() {
                   </ProtectedRoute>
                 }
               >
+                <Route path="orders" element={<Orders />} />
                 <Route path="checkout" element={<Checkout />} />
               </Route>
             </Route>

@@ -17,16 +17,18 @@ import { useNavigate } from "react-router-dom";
 import CheckoutItem from "./CheckoutItem";
 import { Separator } from "@/components/ui/separator";
 import CheckoutPrice from "./CheckoutPrice";
+import { useCreateOrder } from "@/hooks/useCreateOrder";
 
 const shippingFee = 9.99;
 
 function Checkout() {
-  const { cartItems, setIsCartOpen } = useCart();
+  const { cartItems, setIsCartOpen, clearCart } = useCart();
   const navigate = useNavigate();
-  const { cartData, isLoading } = useProductsByIds(
+  const { cartData, isLoading: isCartLoading } = useProductsByIds(
     cartItems.map((item) => item.productId),
   );
   const { toast } = useToast();
+  const { createOrder, isLoading: isCreateOrderLoading } = useCreateOrder();
 
   const checkoutItems = cartData?.map((productDatum) => {
     return {
@@ -53,13 +55,13 @@ function Checkout() {
 
   useEffect(
     function () {
-      if (!cartData && !isLoading)
+      if (!cartData && !isCartLoading)
         toast({
           variant: "destructive",
           description: "Cart item cannot be found",
         });
     },
-    [cartData, isLoading, toast],
+    [cartData, isCartLoading, toast],
   );
 
   const totalPrice =
@@ -68,8 +70,36 @@ function Checkout() {
       0,
     ) || 0;
 
+  function handleCheckout(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    if (!checkoutItems || checkoutItems.length < 1) return;
+
+    if (isCreateOrderLoading) return;
+
+    const orderData = {
+      totalPrice: totalPrice + shippingFee,
+      items: checkoutItems.map((item) => {
+        return {
+          productId: item.id,
+          quantity: item.quantity,
+        };
+      }),
+    };
+
+    createOrder(orderData, {
+      onSuccess: () => {
+        clearCart();
+        navigate("/orders");
+      },
+    });
+  }
+
   return (
-    <form className="container mx-auto my-12 grid grid-cols-1 gap-12 px-4 md:px-6 lg:grid-cols-2">
+    <form
+      className="container mx-auto my-12 grid grid-cols-1 gap-12 px-4 md:px-6 lg:grid-cols-2"
+      onSubmit={handleCheckout}
+    >
       <div>
         <h1 className="mb-6 text-2xl font-bold">Checkout</h1>
 
@@ -107,7 +137,11 @@ function Checkout() {
             </Select>
           </div>
 
-          <Button className="w-full" type="submit" disabled={!checkoutItems}>
+          <Button
+            className="w-full"
+            type="submit"
+            disabled={isCreateOrderLoading}
+          >
             Place Order
           </Button>
         </div>
