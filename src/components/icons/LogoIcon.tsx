@@ -1,5 +1,3 @@
-// https://www.figma.com/community/file/1316856874839017205
-
 function LogoIcon() {
   return (
     <svg
