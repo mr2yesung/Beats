@@ -11,17 +11,14 @@ import About from "./pages/about/About";
 import Login from "./pages/login/Login";
 import SignUp from "./pages/sign-up/SignUp";
 import { AuthProvider } from "./contexts/AuthContext";
-import { QueryClientProvider, useQueryClient } from "@tanstack/react-query";
 import { Toaster } from "./components/ui/toaster";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Checkout from "./pages/checkout/Checkout";
 import Orders from "./pages/orders/Orders";
 
 function App() {
-  const queryClient = useQueryClient();
-
   return (
-    <QueryClientProvider client={queryClient}>
+    <>
       <ScrollToTop />
 
       <AuthProvider>
@@ -57,7 +54,7 @@ function App() {
       </AuthProvider>
 
       <Toaster />
-    </QueryClientProvider>
+    </>
   );
 }
 
