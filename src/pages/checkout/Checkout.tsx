@@ -24,7 +24,7 @@ const shippingFee = 9.99;
 function Checkout() {
   const { cartItems, setIsCartOpen, clearCart } = useCart();
   const navigate = useNavigate();
-  const { cartData, isLoading: isCartLoading } = useProductsByIds(
+  const { data: cartData, isLoading: isCartLoading } = useProductsByIds(
     cartItems.map((item) => item.productId),
   );
   const { toast } = useToast();

@@ -11,7 +11,7 @@ function useProductsByIds(ids: number[]) {
     queryFn: () => getProductsByIds(ids),
   });
 
-  return { cartData: data, isLoading, error };
+  return { data, isLoading, error };
 }
 
 export { useProductsByIds };

@@ -1,12 +1,12 @@
 import { useToast } from "@/components/ui/use-toast";
-import { supabaseCreateOrder, orderData } from "@/services/apiOrders";
+import { supabaseCreateOrder, orderPostData } from "@/services/apiOrders";
 import { useMutation } from "@tanstack/react-query";
 
 function useCreateOrder() {
   const { toast } = useToast();
 
   const { mutate: createOrder, isPending: isLoading } = useMutation({
-    mutationFn: (orderData: orderData) => supabaseCreateOrder(orderData),
+    mutationFn: (orderData: orderPostData) => supabaseCreateOrder(orderData),
     onSuccess: () => {
       toast({
         description: "Order created successfully",
