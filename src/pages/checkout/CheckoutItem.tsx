@@ -26,7 +26,9 @@ function CheckoutItem({
           <p className="text-foreground/60">Quantity: {quantity}</p>
         </div>
       </div>
-      <p className="font-bold">&#36;{actualPrice * quantity}</p>
+      <p className="font-bold">
+        &#36;{Math.floor(actualPrice * quantity * 100) / 100}
+      </p>
     </div>
   );
 }
